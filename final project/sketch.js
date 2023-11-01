@@ -1,63 +1,85 @@
-let apple=[];
+let apple = [];
+let scale = [];
+let arc1 = [];
+let arc2 = [];
+let color1 = [];
+let color2 = [];
+
 let branches;
 function setup() {
   colorMode(HSL);
-  branches=5;
+  branches = 5;
   //halfCol1=(225,80,70);//颜色测试
- // halfCol2=(255,90,80);//颜色测试
+  // halfCol2=(255,90,80);//颜色测试
   //createCanvas(windowWidth, windowHeight);
-  
-  for( branches=0;branches<12;branches++){
-    apple[branches]=[];
+
+  for (branches = 0; branches < 12; branches++) {
+    apple[branches] = [];
+    scale[branches] = [];
+    arc1[branches] = [];
+    arc2[branches] = [];
+    color1[branches] = [];
+    color2[branches] = [];
+    let i = 0;
+    for (i = 0; i < 12; i++) {
+      scale[branches][i] = random(20, 50);
+      arc1[branches][i] = random(-1 / 4 * PI, 1 / 4 * PI);
+      arc2[branches][i] = random(3 / 4 * PI, 5 / 4 * PI);
+      let hg = random(45, 90);
+      let hr = random(0, 20);
+      let s = random(80, 100);
+      let l = random(60, 80);
+      color1[branches][i] = color(hg, s, l);
+      color2[branches][i] = color(hr, s, l);
+    }
+
   }
- // apple[0][0]= new Apple(halfCol1,halfCol2);//+xpos...
- let scale_1 = random(20,50);//让两个半圆边界线还有颜色固定的话需要在这里用三元组储存在编号和苹果数组一样的数组里面。再setup里面完成定义。
- apple[0][0]= new Apple(200,200,scale_1);//+xpos...
+
 }
 
 function draw() {
-  createCanvas(400,400);
-  background(100,0,100);
-  ellipse(20,20,20,20)
-
-  apple[0][0].draw();
+  createCanvas(400, 400);
+  background(100, 0, 100);
+  outpuApple(5, 6, 300, 300);
+  outpuApple(4, 3, 100, 100);
 }
 
-class Apple{
-  constructor(xPosIn,yPosIn,scaleIn){
-    this.color_1=null;
-    this.color_2=null;
-    this.xPos=xPosIn;
-    this.yPos=yPosIn;
-    this.scalePrm=scaleIn;
-    this.arc_1=null;
-    this.arc_2=null;
+function outpuApple(branch, AppleNum, x, y) {
+  apple[branch][AppleNum] = new Apple(x, y, scale[branch][AppleNum], arc1[branch][AppleNum], arc2[branch][AppleNum], branch, color1[branch][AppleNum], color2[branch][AppleNum]);
+  return apple[branch][AppleNum].draw();
+}
+class Apple {
+  constructor(xPosIn, yPosIn, scaleIn, arc1In, arc2In, branchNum, color1In, color2In) {
+    this.color_1 = color1In;
+    this.color_2 = color2In;
+    this.xPos = xPosIn;
+    this.yPos = yPosIn;
+    this.scalePrm = scaleIn;
+    this.arc_1 = arc1In;
+    this.arc_2 = arc2In;
+    this.branch = branchNum;
+
   }
-  calculateDrawPos(){
-    if(branches%2==1){
-      this.arc_1=random(-1/4*PI,1/4*PI);
-      this.arc_2=random(3/4*PI,5/4*PI);
+  calculateDrawPos() {
+    if (this.branch % 2 == 0) {
+
+      this.arc_1 -= 1 / 2 * PI;
+      this.arc_2 -= 1 / 2 * PI;
+      this.branch += 1;
     }
-    else{
-      this.arc_1=random(-3/4*PI,-1/4*PI);
-      this.arc_2=random(1/4*PI,3/4*PI);
-    }
+
   }
-  getColor(){
-    let hg=random(45,90);
-    let hr=random(0,20);
-    let s=random(80,100);
-    let l= random(60,80);
-    if(Math.round(Math.random())==1){
-      this.color_1=color(hg,s,l);
-      this.color_2=color(hr,s,l);
+  getColor() {
+
+    if (Math.round(this.scalePrm) % 2 == 1) {
+      let swap = this.color_1;
+      this.color_1 = this.color_2;
+      this.color_2 = swap;
+      this.scalePrm += 1;
     }
-    else{
-      this.color_2=color(hg,s,l);
-      this.color_1=color(hr,s,l);
-    }
+
   }
-  draw(){
+  draw() {
     this.getColor();
     this.calculateDrawPos();//易漏
     fill(this.color_1);
@@ -66,6 +88,6 @@ class Apple{
     fill(this.color_2);
     arc(this.xPos, this.yPos, this.scalePrm, this.scalePrm, this.arc_2, this.arc_1, OPEN);
     //arc(200,200,50,50,3/4*PI,1/3*PI,OPEN);
-   
+
   }
 }
