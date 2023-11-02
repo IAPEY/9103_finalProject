@@ -4,8 +4,8 @@ let arc1 = [];
 let arc2 = [];
 let color1 = [];
 let color2 = [];
-
 let branches;
+
 function setup() {
     colorMode(HSL);
     branches = 5;
@@ -22,7 +22,7 @@ function setup() {
       color2[branches] = [];
       let i = 0;
       for (i = 0; i < 12; i++) {
-        scale[branches][i] = random(20, 50);
+        scale[branches][i] = random(50, 80);
         arc1[branches][i] = random(-1 / 4 * PI, 1 / 4 * PI);
         arc2[branches][i] = random(3 / 4 * PI, 5 / 4 * PI);
         let hg = random(45, 90);
@@ -38,11 +38,12 @@ function setup() {
   }
 
 function outpuApple(branch, AppleNum, x, y) {
-    apple[branch][AppleNum] = new Apple(x, y, scale[branch][AppleNum], arc1[branch][AppleNum], arc2[branch][AppleNum], branch, color1[branch][AppleNum], color2[branch][AppleNum]);
+    apple[branch][AppleNum] = new Apple(x, y, scale[branch][AppleNum], arc1[branch][AppleNum], arc2[branch][AppleNum], branch, color1[branch][AppleNum], color2[branch][AppleNum],AppleNum);
     return apple[branch][AppleNum].draw();
   }
+
   class Apple {
-    constructor(xPosIn, yPosIn, scaleIn, arc1In, arc2In, branchNum, color1In, color2In) {
+    constructor(xPosIn, yPosIn, scaleIn, arc1In, arc2In, branchNum, color1In, color2In,numIn) {
       this.color_1 = color1In;
       this.color_2 = color2In;
       this.xPos = xPosIn;
@@ -51,6 +52,7 @@ function outpuApple(branch, AppleNum, x, y) {
       this.arc_1 = arc1In;
       this.arc_2 = arc2In;
       this.branch = branchNum;
+      this.num = numIn;
   
     }
     calculateDrawPos() {
@@ -72,7 +74,10 @@ function outpuApple(branch, AppleNum, x, y) {
       }
   
     }
+
+      
     draw() {
+      this.movement();
       this.getColor();
       this.calculateDrawPos();//易漏
       fill(this.color_1);
