@@ -8,9 +8,6 @@ let branches;//设置全局变量和数组
 
 function setup() {
   colorMode(HSL);
-  //halfCol1=(225,80,70);//颜色测试
-  // halfCol2=(255,90,80);//颜色测试
-  //createCanvas(windowWidth, windowHeight);
   createCanvas(windowWidth, windowHeight);
   for (branches = 0; branches < 12; branches++) {
     apple[branches] = [];
