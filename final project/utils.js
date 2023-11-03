@@ -74,7 +74,6 @@ class Apple {//定义苹果类
 
 
   draw() {
-    this.movement();
     this.getColor();
     this.calculateDrawPos();//从上面几个类方法中获取参数
     fill(this.color_1);
@@ -85,8 +84,4 @@ class Apple {//定义苹果类
     //arc(200,200,50,50,3/4*PI,1/3*PI,OPEN);
 
   }
-}
-Apple.prototype.movement = function () {
-
-
 }
