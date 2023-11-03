@@ -31,6 +31,7 @@ function setup() {
 
   }
 
+  
 }
 
 function outpuApple(branch, AppleNum, x, y) {
