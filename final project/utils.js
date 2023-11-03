@@ -9,7 +9,7 @@ let branches;//设置全局变量和数组
 function setup() {
   colorMode(HSL);
   createCanvas(windowWidth, windowHeight);
-  for (branches = 0; branches < 16; branches++) {
+  for (branches = 0; branches < 17; branches++) {
     apple[branches] = [];
     scale[branches] = [];
     arc1[branches] = [];
@@ -17,7 +17,7 @@ function setup() {
     color1[branches] = [];
     color2[branches] = [];//设置存放颜色，苹果序号，枝干序号，苹果分割线角度，苹果大小的数组
     let i = 0;
-    for (i = 0; i < 16; i++) {
+    for (i = 0; i < 17; i++) {
       scale[branches][i] = random(50, 80);
       arc1[branches][i] = random(-1 / 4 * PI, 1 / 4 * PI);
       arc2[branches][i] = random(3 / 4 * PI, 5 / 4 * PI);
