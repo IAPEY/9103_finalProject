@@ -85,3 +85,7 @@ class Apple {//定义苹果类
 
   }
 }
+Apple.prototype.movement = function () {
+
+
+}
