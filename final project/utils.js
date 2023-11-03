@@ -18,7 +18,7 @@ function setup() {
     color2[branches] = [];//设置存放颜色，苹果序号，枝干序号，苹果分割线角度，苹果大小的数组
     let i = 0;
     for (i = 0; i < 17; i++) {
-      scale[branches][i] = random(50, 80);
+      scale[branches][i] = random(30, 70);
       arc1[branches][i] = random(-1 / 4 * PI, 1 / 4 * PI);
       arc2[branches][i] = random(3 / 4 * PI, 5 / 4 * PI);
       let hg = random(45, 90);
