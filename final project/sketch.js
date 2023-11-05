@@ -1,7 +1,13 @@
 let circles = [];
+let scl = 1;
+let col1 = "#ea3e3e";
+let col2 = "#519365";
 
 function setup() {
-  createCanvas(457, 650);
+  createCanvas(windowWidth, windowHeight);
+  let scl1 = width / 457;
+  let scl2 = height / 650;
+  scl = min(scl1, scl2);
 
   rectMode(CORNERS);
   strokeWeight(3);
@@ -43,10 +49,15 @@ function setup() {
   circles.push(new HalfCircle(322, 206, 35, 1.3, PI + 1.9, false));
   circles.push(new HalfCircle(317, 236, 36, 1.1, PI + 2.1, false));
 
+  
+
 }
 
 function draw() {
   background(255);
+  translate((width - scl * 457) / 2, (height - scl * 650) / 2);
+
+  scale(scl);
 
   // black stroke
   noFill();
@@ -59,25 +70,25 @@ function draw() {
   fill("#d7b764");
   rect(104, 482, 333, 539);
   stroke("#d7b764");
-  fill("#ea3e3e");
+  fill(col1);
   rect(148, 482, 186, 539);
-  fill("#519365");
+  fill(col2);
   rect(186, 482, 230, 539);
   rect(266, 482, 308, 539);
 
   noStroke();
-  fill("#519365");
+  fill(col2);
   arc(128, 539, 40, 40, PI, 2 * PI);
   fill("#d7b764");
   arc(168, 539, 40, 30, PI, 2 * PI);
-  fill("#ea3e3e");
+  fill(col1);
   stroke("#d7b764");
   arc(208, 539, 40, 50, PI, 2 * PI);
   noStroke();
   arc(248, 539, 38, 40, PI, 2 * PI);
   fill("#d7b764");
   arc(286, 539, 38, 20, PI, 2 * PI);
-  fill("#519365");
+  fill(col2);
   arc(320, 539, 25, 25, PI, 2 * PI);
 
   stroke(0);
@@ -103,7 +114,18 @@ function draw() {
   line(183, 198, 277, 198);
   line(274, 173, 277, 198);
   line(204, 173, 203, 198);
+
+  
 }
+// function windowResized() {
+//   resizeCanvas(windowWidth, windowHeight);
+// }
+
+function mousePressed() {
+  col1 = color(random(255), random(255), random(255));
+  col2 = color(random(255), random(255), random(255));
+}
+
 
 // half filling circle
 class HalfCircle {
@@ -120,14 +142,14 @@ class HalfCircle {
   show() {
     // stroke("#d7b764");
     if (this.fm) {
-      fill("#ea3e3e");
+      fill(col1);
       arc(this.x, this.y, this.diam, this.diam, this.sa, this.ea, CHORD);
-      fill("#519365");
+      fill(col2);
       arc(this.x, this.y, this.diam, this.diam, this.ea, this.sa, CHORD);
     } else {
-      fill("#519365");;
+      fill(col2);;
       arc(this.x, this.y, this.diam, this.diam, this.sa, this.ea, CHORD);
-      fill("#ea3e3e");
+      fill(col1);
       arc(this.x, this.y, this.diam, this.diam, this.ea, this.sa, CHORD);
     }
   }
