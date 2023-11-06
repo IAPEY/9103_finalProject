@@ -8,6 +8,7 @@ function setup() {
   let scl1 = width / 457;
   let scl2 = height / 650;
   scl = min(scl1, scl2);
+  background(57, 64, 68);
 
   rectMode(CORNERS);
   strokeWeight(3);
@@ -49,14 +50,24 @@ function setup() {
   circles.push(new HalfCircle(322, 206, 35, 1.3, PI + 1.9, false));
   circles.push(new HalfCircle(317, 236, 36, 1.1, PI + 2.1, false));
 
-  
+  // Create background 
+  bg = createGraphics(windowWidth, windowHeight);
+  bg.noStroke();
+
+  // Drawing a dark blue textured background on a graphical object
+  for (let i = 0; i < 15000; i++) {
+    let x = random(bg.width);
+    let y = random(bg.height);
+    bg.stroke(182, 172, 104);
+    bg.point(x, y);
+  }
 
 }
 
 function draw() {
-  background(255);
-  translate((width - scl * 457) / 2, (height - scl * 650) / 2);
 
+  image(bg, 0, 0);
+  translate((width - scl * 457) / 2, (height - scl * 650) / 2);
   scale(scl);
 
   // black stroke
@@ -65,7 +76,6 @@ function draw() {
   for (let i = 0; i < circles.length; i++) {
     circle(circles[i].x, circles[i].y, circles[i].diam + 2);
   }
-
   // bottom
   fill("#d7b764");
   rect(104, 482, 333, 539);
@@ -75,7 +85,6 @@ function draw() {
   fill(col2);
   rect(186, 482, 230, 539);
   rect(266, 482, 308, 539);
-
   noStroke();
   fill(col2);
   arc(128, 539, 40, 40, PI, 2 * PI);
@@ -94,7 +103,6 @@ function draw() {
   stroke(0);
   noFill();
   rect(104, 482, 333, 539);
-
   noStroke();
   for (let i = 0; i < circles.length; i++) {
     circles[i].show();
@@ -115,7 +123,7 @@ function draw() {
   line(274, 173, 277, 198);
   line(204, 173, 203, 198);
 
-  
+
 }
 // function windowResized() {
 //   resizeCanvas(windowWidth, windowHeight);
@@ -147,7 +155,7 @@ class HalfCircle {
       fill(col2);
       arc(this.x, this.y, this.diam, this.diam, this.ea, this.sa, CHORD);
     } else {
-      fill(col2);;
+      fill(col2);
       arc(this.x, this.y, this.diam, this.diam, this.sa, this.ea, CHORD);
       fill(col1);
       arc(this.x, this.y, this.diam, this.diam, this.ea, this.sa, CHORD);
