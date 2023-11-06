@@ -129,12 +129,6 @@ function draw() {
 //   resizeCanvas(windowWidth, windowHeight);
 // }
 
-function mousePressed() {
-  col1 = color(random(255), random(255), random(255));
-  col2 = color(random(255), random(255), random(255));
-}
-
-
 // half filling circle
 class HalfCircle {
   constructor(_x, _y, _diam, _sa, _ea, _fm) {
